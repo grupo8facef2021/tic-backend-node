@@ -1,8 +1,9 @@
-import express, { Router, Request, Response, NextFunction } from 'express'
 import 'express-async-errors'
-import userRoutes from './routes/UserRoutes'
 import './database'
+import express, { Router, Request, Response, NextFunction } from 'express'
 import CustomError from './exceptions/CustomError'
+import userRoutes from './routes/UserRoutes'
+import employeeRoutes from './routes/EmployeeRoutes'
 
 const app = express()
 
@@ -10,6 +11,7 @@ const router = Router()
 
 app.use(express.json())
 
+router.use('/employees', employeeRoutes)
 router.use('/users', userRoutes)
 
 app.use(router)
