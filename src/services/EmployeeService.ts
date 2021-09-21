@@ -1,13 +1,46 @@
+import CustomError from '../exceptions/CustomError'
 import { getCustomRepository } from "typeorm"
 import EmployeeRepository from '../repositories/EmployeeRepository'
 
-interface IRequest {
+interface ICreateRequest {
     name: string,
     role: string,
 }
 
+interface IUpdateRequest {
+    id: string,
+    name: string,
+    role: string,
+}
 class EmployeeService {
-    async create({ name, role }: IRequest) {
+
+    employeeRepository: EmployeeRepository
+
+    constructor() {
+        this.employeeRepository = getCustomRepository(EmployeeRepository)
+    }
+
+    async _findEmployee(id: string) {
+        const employee = await this.employeeRepository.findOne(id)
+        if (!employee) {
+            throw new CustomError('Funcionário não encontrado', 404)
+        }
+
+        return employee
+    }
+
+    async getAll() {
+        const employees = await this.employeeRepository.find()
+        return employees
+    }
+
+    async getOnly(id: string) {
+        const employee = await this._findEmployee(id)
+
+        return employee
+    }
+
+    async create({ name, role }: ICreateRequest) {
         const employeeRepository = getCustomRepository(EmployeeRepository)
         const employee = employeeRepository.create({ name, role })
 
@@ -15,19 +48,19 @@ class EmployeeService {
         return employee
     }
 
-    async get(request: Request, reponse: Response) {
-        const employeeRepository = getCustomRepository(EmployeeRepository)
-        
-    } 
+    async update({ id, name, role }: IUpdateRequest) {
+        let employee = await this._findEmployee(id)
 
-    async update(request: Request, response: Response) {
-        const employeeRepository = getCustomRepository(EmployeeRepository)
+        employee = { ...employee, name, role }
+        await this.employeeRepository.save(employee)
 
+        return employee
     }
 
-    public async remove(request: Request, response: Response) {
-        const employeeRepository = getCustomRepository(EmployeeRepository)
- 
+    async remove(id: string) {
+        await this._findEmployee(id)
+
+        await this.employeeRepository.delete(id)
     }
 }
 

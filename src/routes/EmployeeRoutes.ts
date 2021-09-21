@@ -1,10 +1,13 @@
-import { Request, Response, Router } from 'express'
+import { Router } from 'express'
 import EmployeeController from '../controllers/EmployeeController'
 
 const employeeController = new EmployeeController()
 const router = Router()
 
-router.post('/', employeeController.create)
-router.get('/', employeeController.get)    
+router.get('/', employeeController.getAll)
+router.get('/:id', employeeController.getOnly)
+router.post('/', employeeController.post)
+router.put('/:id', employeeController.put)
+router.delete('/:id', employeeController.delete)
 
 export default router

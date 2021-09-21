@@ -9,13 +9,12 @@ interface ICreateRequest {
     password: string,
     level: number,
 }
-
 interface IUpdateRequest {
     id: string,
     name: string,
     password: string,
     new_password: string,
-    level: number
+    level: number,
 }
 
 class UserService {
@@ -37,6 +36,7 @@ class UserService {
 
     async getAll() {
         const users = await this.userRepository.find()
+
         return users
     }
 
@@ -54,8 +54,8 @@ class UserService {
         }
 
         const hashPassword = await hash(password, 8)
-
         const user = this.userRepository.create({ name, email, password: hashPassword, level })
+        
         await this.userRepository.save(user)
 
         return user
@@ -63,7 +63,7 @@ class UserService {
 
     async update({ id, name, password, new_password, level }: IUpdateRequest) {
         let user = await this._findUser(id)
-        
+
         const correctPassword = await compare(password, user.password)
         if (!correctPassword) {
             throw new CustomError('Senha incorreta', 422)

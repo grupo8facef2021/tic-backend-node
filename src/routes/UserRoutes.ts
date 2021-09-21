@@ -1,4 +1,4 @@
-import { Request, Response, Router } from 'express'
+import { Router } from 'express'
 import UserController from '../controllers/UserController'
 
 const userController = new UserController()
@@ -11,8 +11,4 @@ router.post('/', userController.post)
 router.put('/:id', userController.put)
 router.delete('/:id', userController.delete)
 
-router.get('/', () => {
-    console.log('teste2')
-})
-    
 export default router
