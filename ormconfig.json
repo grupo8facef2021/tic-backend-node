@@ -1,9 +1,9 @@
 {
     "type": "postgres",
     "host": "localhost",
-    "port": 5432,
+    "port": 55555,
     "username": "postgres",
-    "password": "DB",
+    "password": "123456",
     "database": "tic-database",
     "migrations": [
         "./src/database/migrations/*.ts"

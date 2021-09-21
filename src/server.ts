@@ -1,6 +1,6 @@
 import express, { Router, Request, Response, NextFunction } from 'express'
 import 'express-async-errors'
-import userRoutes from './routes/user/UserRoutes'
+import userRoutes from './routes/UserRoutes'
 import './database'
 import CustomError from './exceptions/CustomError'
 
