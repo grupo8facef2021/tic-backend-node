@@ -28,7 +28,6 @@
     "migration-create": "ts-node-dev ./node_modules/typeorm/cli.js migration:create -n",
     "migration-run": "ts-node-dev ./node_modules/typeorm/cli.js migration:run",
     "migration-revert": "ts-node-dev ./node_modules/typeorm/cli.js migration:revert"
-    
   },
   "keywords": [],
   "author": "",

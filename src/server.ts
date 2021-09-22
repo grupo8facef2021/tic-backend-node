@@ -5,6 +5,7 @@ import CustomError from './exceptions/CustomError'
 import userRoutes from './routes/UserRoutes'
 import employeeRoutes from './routes/EmployeeRoutes'
 import authRoutes from './routes/AuthRoutes'
+import { errors } from 'celebrate'
 
 const app = express()
 
@@ -17,6 +18,8 @@ router.use('/users', userRoutes)
 router.use('/auth', authRoutes)
 
 app.use(router)
+
+app.use(errors())
 
 app.use((error: Error, request: Request, response: Response, next: NextFunction) => {
     if(error instanceof CustomError){
