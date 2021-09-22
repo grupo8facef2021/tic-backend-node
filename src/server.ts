@@ -4,6 +4,7 @@ import express, { Router, Request, Response, NextFunction } from 'express'
 import CustomError from './exceptions/CustomError'
 import userRoutes from './routes/UserRoutes'
 import employeeRoutes from './routes/EmployeeRoutes'
+import authRoutes from './routes/AuthRoutes'
 
 const app = express()
 
@@ -13,6 +14,7 @@ app.use(express.json())
 
 router.use('/employees', employeeRoutes)
 router.use('/users', userRoutes)
+router.use('/auth', authRoutes)
 
 app.use(router)
 
