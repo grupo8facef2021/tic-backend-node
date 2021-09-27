@@ -1,5 +1,5 @@
 import {EntityRepository, Repository} from 'typeorm'
-import SituationEntity from 'src/entities/SituationEntity';
+import SituationEntity from '../entities/SituationEntity';
 
 @EntityRepository(SituationEntity)
 class SituationRepository extends Repository<SituationEntity>{

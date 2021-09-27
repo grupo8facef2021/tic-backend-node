@@ -1,7 +1,7 @@
 import { getCustomRepository } from "typeorm";
 import { hash, compare } from 'bcryptjs';
-import CustomError from "src/exceptions/CustomError";
-import SituationRepository from "src/repositories/SituationRepository";
+import CustomError from "../exceptions/CustomError";
+import SituationRepository from "../repositories/SituationRepository";
 
 interface ICreateRequest {
     description: string,

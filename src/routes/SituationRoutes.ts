@@ -1,6 +1,6 @@
 import { Router } from "express";
-import SituationController from "src/controllers/SituationController";
-import AuthService from "src/services/AuthService";
+import SituationController from "../controllers/SituationController";
+import AuthService from "../services/AuthService";
 import { celebrate, Segments, Joi } from "celebrate";
 
 const situationController = new SituationController();
@@ -12,9 +12,9 @@ router.post(
   "/",
   celebrate({
     [Segments.BODY]: {
-      description: Joi.string().required,
-      color: Joi.string().required,
-      status: Joi.number().required,
+      description: Joi.string().required(),
+      color: Joi.string().required(),
+      status: Joi.number().required(),
     },
   }),
   situationController.post
@@ -56,4 +56,4 @@ router.delete(
     situationController.delete
 )
 
-export default Router;
+export default router;
