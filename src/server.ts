@@ -16,6 +16,7 @@ app.use(express.json())
 router.use('/employees', employeeRoutes)
 router.use('/users', userRoutes)
 router.use('/auth', authRoutes)
+router.use('/situations', authRoutes)
 
 app.use(router)
 

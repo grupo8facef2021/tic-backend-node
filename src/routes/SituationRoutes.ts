@@ -40,9 +40,7 @@ router.put(
         },
         [Segments.BODY]: {
             description: Joi.string().required(),
-            new_desciption: Joi.string().required(),
             color: Joi.string(),
-            new_color: Joi.string(),
             status: Joi.number().required()
         }
     }),

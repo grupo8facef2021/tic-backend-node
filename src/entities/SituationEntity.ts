@@ -16,4 +16,4 @@ class SituationEntity {
     status: number
 }
 
-export default SituationEntity
+export default SituationEntity;

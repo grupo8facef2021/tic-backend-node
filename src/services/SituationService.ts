@@ -10,10 +10,9 @@ interface ICreateRequest {
 }
 
 interface IUpdateRequest{
+    id: string,
     description: string,
-    new_description: string
     color: string,
-    new_color: string,
     status: number
 }
 
@@ -50,24 +49,30 @@ class SituationService {
         const situationExists = await this.situationRepository.findByDescription(description)
 
         if (situationExists) {
-            throw new CustomError("Situação já existe")
+            throw new CustomError("Situação já existente!")
         }
+
+        const situation = this.situationRepository.create({ description, color, status })
+
+        await this.situationRepository.save(situation)
+        return situation
 
     } 
 
-    async update({ id, description, new_description, color, new_color, status }: IUpdateRequest) {
+    async update({ id, description, color, status }: IUpdateRequest) {
         let situation = await this._showSituation(id)
 
-        const descriptionRight = await compare(description, situation.description)
-        if (!descriptionRight) {
-            throw new CustomError('Descrição Correta', 422)
-        }
-
-
-
+        situation= {...situation, description, color, status}
         await this.situationRepository.save(situation)
 
         return situation
+
+    }
+
+    async remove(id: string) {
+        await this._showSituation(id)
+
+        await this.situationRepository.delete(id)
     }
     
 }
