@@ -57,7 +57,6 @@ class UserService {
         const user = this.userRepository.create({ name, email, password: hashPassword, level })
 
         await this.userRepository.save(user)
-
         return user
     }
 

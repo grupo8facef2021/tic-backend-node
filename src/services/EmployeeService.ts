@@ -41,10 +41,15 @@ class EmployeeService {
     }
 
     async create({ name, role }: ICreateRequest) {
-        const employeeRepository = getCustomRepository(EmployeeRepository)
-        const employee = employeeRepository.create({ name, role })
+        const employeeExists = await this.employeeRepository.findByName(name)
 
-        await employeeRepository.save(employee)
+        if (employeeExists) {
+            throw new CustomError('Funcionário já cadastrado com esse nome')
+        }
+
+        let employee = this.employeeRepository.create({ name, role })
+
+        await this.employeeRepository.save(employee)
         return employee
     }
 

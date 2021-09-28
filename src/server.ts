@@ -24,11 +24,11 @@ app.use(router)
 app.use(errors())
 
 app.use((error: Error, request: Request, response: Response, next: NextFunction) => {
+    console.log(error.message)
     if (error instanceof CustomError) {
         return response.status(error.status).json(error)
     }
 
-    console.log(error.message)
     return response.status(500).json({
         message: 'Internal server error',
         status: 500
