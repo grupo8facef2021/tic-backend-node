@@ -1,4 +1,4 @@
-import {EntityRepository, Repository} from 'typeorm'
+import { EntityRepository, Repository } from 'typeorm'
 import SituationEntity from '../entities/SituationEntity';
 
 @EntityRepository(SituationEntity)

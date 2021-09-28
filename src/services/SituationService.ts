@@ -7,7 +7,7 @@ interface ICreateRequest {
     color: string
 }
 
-interface IUpdateRequest{
+interface IUpdateRequest {
     id: string,
     description: string,
     color: string
@@ -16,7 +16,7 @@ interface IUpdateRequest{
 class SituationService {
 
     situationRepository: SituationRepository
-    
+
     constructor() {
         this.situationRepository = getCustomRepository(SituationRepository)
     }
@@ -30,7 +30,7 @@ class SituationService {
         return situation
     }
 
-    async getAll(){
+    async getAll() {
         const situations = await this.situationRepository.find()
 
         return situations
@@ -42,7 +42,7 @@ class SituationService {
         return situation
     }
 
-    async create({description, color}: ICreateRequest) {
+    async create({ description, color }: ICreateRequest) {
         const situationExists = await this.situationRepository.findByDescription(description)
 
         if (situationExists) {
@@ -54,12 +54,12 @@ class SituationService {
         await this.situationRepository.save(situation)
         return situation
 
-    } 
+    }
 
     async update({ id, description, color }: IUpdateRequest) {
         let situation = await this._findSituation(id)
 
-        situation= {...situation, description, color}
+        situation = { ...situation, description, color }
         await this.situationRepository.save(situation)
 
         return situation
@@ -71,7 +71,7 @@ class SituationService {
 
         await this.situationRepository.delete(id)
     }
-    
+
 }
 
 export default SituationService;

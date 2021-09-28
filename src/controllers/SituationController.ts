@@ -3,7 +3,7 @@ import SituationService from '../services/SituationService'
 
 class SituationController {
     public async getAll(request: Request, response: Response) {
-        const situationService  = new SituationService()
+        const situationService = new SituationService()
         const situations = await situationService.getAll()
 
         return response.json(situations)
@@ -17,7 +17,7 @@ class SituationController {
         return response.json(situation)
     }
 
-    public async put(request: Request, response: Response){
+    public async put(request: Request, response: Response) {
         const situationService = new SituationService()
         const { id } = request.params
         const { description, color } = request.body
@@ -26,15 +26,15 @@ class SituationController {
         return response.json(situation)
     }
 
-    public async post(request: Request, response: Response){
+    public async post(request: Request, response: Response) {
         const situationService = new SituationService()
         const { description, color } = request.body
-        const situation = await situationService.create({description, color})
+        const situation = await situationService.create({ description, color })
 
         return response.status(201).json(situation)
     }
 
-    public async delete(request: Request, response: Response){
+    public async delete(request: Request, response: Response) {
         const situationService = new SituationService()
         const { id } = request.params
 

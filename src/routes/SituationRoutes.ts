@@ -33,27 +33,27 @@ router.post(
 );
 
 router.put(
-    '/:id',
-    celebrate({
-        [Segments.PARAMS]: {
-            id: Joi.string().uuid().required()
-        },
-        [Segments.BODY]: {
-            description: Joi.string().required(),
-            color: Joi.string()
-        }
-    }),
-    situationController.put
+  '/:id',
+  celebrate({
+    [Segments.PARAMS]: {
+      id: Joi.string().uuid().required()
+    },
+    [Segments.BODY]: {
+      description: Joi.string().required(),
+      color: Joi.string()
+    }
+  }),
+  situationController.put
 )
 
 router.delete(
-    '/:id',
-    celebrate({
-        [Segments.PARAMS]: {
-            id: Joi.string().uuid().required()
-        }
-    }),
-    situationController.delete
+  '/:id',
+  celebrate({
+    [Segments.PARAMS]: {
+      id: Joi.string().uuid().required()
+    }
+  }),
+  situationController.delete
 )
 
 export default router;

@@ -24,7 +24,7 @@ app.use(router)
 app.use(errors())
 
 app.use((error: Error, request: Request, response: Response, next: NextFunction) => {
-    if(error instanceof CustomError){
+    if (error instanceof CustomError) {
         return response.status(error.status).json(error)
     }
 

@@ -55,7 +55,7 @@ class UserService {
 
         const hashPassword = await hash(password, 8)
         const user = this.userRepository.create({ name, email, password: hashPassword, level })
-        
+
         await this.userRepository.save(user)
 
         return user
