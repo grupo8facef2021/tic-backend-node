@@ -8,17 +8,6 @@ const authService = new AuthService()
 
 const router = Router()
 
-router.post(
-    '/',
-    celebrate({
-        [Segments.BODY]: {
-            name: Joi.string().required(),
-            role: Joi.string().required(),
-        }
-    }),
-    employeeController.post
-)
-
 router.use(authService.isAuthenticated)
 
 router.get('/', employeeController.getAll)
@@ -31,6 +20,18 @@ router.get(
     }),
     employeeController.getOnly
 )
+
+router.post(
+    '/',
+    celebrate({
+        [Segments.BODY]: {
+            name: Joi.string().required(),
+            role: Joi.string().required(),
+        }
+    }),
+    employeeController.post
+)
+
 router.put(
     '/:id',
     celebrate({

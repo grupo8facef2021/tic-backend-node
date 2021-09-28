@@ -8,23 +8,11 @@ const authService = new AuthService();
 
 const router = Router();
 
-router.post(
-  "/",
-  celebrate({
-    [Segments.BODY]: {
-      description: Joi.string().required(),
-      color: Joi.string().required(),
-      status: Joi.number().required(),
-    },
-  }),
-  situationController.post
-);
-
 router.use(authService.isAuthenticated);
 
 router.get("/", situationController.getAll);
 router.get(
-  "/id",
+  "/:id",
   celebrate({
     [Segments.PARAMS]: {
       id: Joi.string().uuid().required(),
@@ -32,6 +20,18 @@ router.get(
   }),
   situationController.getOnly
 )
+
+router.post(
+  "/",
+  celebrate({
+    [Segments.BODY]: {
+      description: Joi.string().required(),
+      color: Joi.string().required()
+    },
+  }),
+  situationController.post
+);
+
 router.put(
     '/:id',
     celebrate({
@@ -40,12 +40,12 @@ router.put(
         },
         [Segments.BODY]: {
             description: Joi.string().required(),
-            color: Joi.string(),
-            status: Joi.number().required()
+            color: Joi.string()
         }
     }),
     situationController.put
 )
+
 router.delete(
     '/:id',
     celebrate({

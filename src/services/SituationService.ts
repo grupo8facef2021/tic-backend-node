@@ -1,19 +1,16 @@
 import { getCustomRepository } from "typeorm";
-import { hash, compare } from 'bcryptjs';
 import CustomError from "../exceptions/CustomError";
 import SituationRepository from "../repositories/SituationRepository";
 
 interface ICreateRequest {
     description: string,
-    color: string,
-    status: number
+    color: string
 }
 
 interface IUpdateRequest{
     id: string,
     description: string,
-    color: string,
-    status: number
+    color: string
 }
 
 class SituationService {
@@ -24,7 +21,7 @@ class SituationService {
         this.situationRepository = getCustomRepository(SituationRepository)
     }
 
-    async _showSituation(id: string) {
+    async _findSituation(id: string) {
         const situation = await this.situationRepository.findOne(id)
         if (!situation) {
             throw new CustomError("Situação não encontrada!", 404)
@@ -40,29 +37,29 @@ class SituationService {
     }
 
     async getOnly(id: string) {
-        const situation = await this._showSituation(id)
+        const situation = await this._findSituation(id)
 
         return situation
     }
 
-    async create({description, color, status}: ICreateRequest) {
+    async create({description, color}: ICreateRequest) {
         const situationExists = await this.situationRepository.findByDescription(description)
 
         if (situationExists) {
             throw new CustomError("Situação já existente!")
         }
 
-        const situation = this.situationRepository.create({ description, color, status })
+        const situation = this.situationRepository.create({ description, color })
 
         await this.situationRepository.save(situation)
         return situation
 
     } 
 
-    async update({ id, description, color, status }: IUpdateRequest) {
-        let situation = await this._showSituation(id)
+    async update({ id, description, color }: IUpdateRequest) {
+        let situation = await this._findSituation(id)
 
-        situation= {...situation, description, color, status}
+        situation= {...situation, description, color}
         await this.situationRepository.save(situation)
 
         return situation
@@ -70,7 +67,7 @@ class SituationService {
     }
 
     async remove(id: string) {
-        await this._showSituation(id)
+        await this._findSituation(id)
 
         await this.situationRepository.delete(id)
     }

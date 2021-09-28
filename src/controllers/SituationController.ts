@@ -20,16 +20,16 @@ class SituationController {
     public async put(request: Request, response: Response){
         const situationService = new SituationService()
         const { id } = request.params
-        const { description, color, status } = request.body
-        const situation = await situationService.update({ id, description, color, status })
+        const { description, color } = request.body
+        const situation = await situationService.update({ id, description, color })
 
         return response.json(situation)
     }
 
     public async post(request: Request, response: Response){
         const situationService = new SituationService()
-        const { description, color, status } = request.body
-        const situation = await situationService.create({description, color, status})
+        const { description, color } = request.body
+        const situation = await situationService.create({description, color})
 
         return response.status(201).json(situation)
     }
