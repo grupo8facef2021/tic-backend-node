@@ -15,7 +15,7 @@ router.post(
             name: Joi.string().required(),
             email: Joi.string().required(),
             password: Joi.string().required(),
-            level: Joi.number().required()
+            level: Joi.number()
         }
     }),
     userController.post

@@ -33,7 +33,8 @@ export class CreateUsers1632023836704 implements MigrationInterface {
                 },
                 {
                     name: 'level',
-                    type: 'int'
+                    type: 'int',
+                    default: 1
                 },
                 {
                     name: 'status',

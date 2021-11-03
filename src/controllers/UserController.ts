@@ -1,4 +1,5 @@
 import { Request, Response } from 'express'
+import UserSchema from '../schemas/UserSchema'
 import UserService from '../services/UserService'
 
 class UserController {
@@ -31,7 +32,7 @@ class UserController {
         const { name, email, password, level } = request.body
         const user = await userService.create({ name, email, password, level })
 
-        return response.status(201).json(user)
+        return response.status(201).json(new UserSchema(user))
     }
 
     public async delete(request: Request, response: Response) {

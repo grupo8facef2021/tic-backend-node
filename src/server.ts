@@ -6,6 +6,7 @@ import userRoutes from './routes/UserRoutes'
 import employeeRoutes from './routes/EmployeeRoutes'
 import situationRoutes from './routes/SituationRoutes'
 import authRoutes from './routes/AuthRoutes'
+import clientRoutes from './routes/ClientRoutes'
 import { errors } from 'celebrate'
 
 const app = express()
@@ -18,6 +19,7 @@ router.use('/employees', employeeRoutes)
 router.use('/users', userRoutes)
 router.use('/auth', authRoutes)
 router.use('/situations', situationRoutes)
+router.use('/clients', clientRoutes)
 
 app.use(router)
 
@@ -25,6 +27,7 @@ app.use(errors())
 
 app.use((error: Error, request: Request, response: Response, next: NextFunction) => {
     console.log(error.message)
+    console.log(error.stack)
     if (error instanceof CustomError) {
         return response.status(error.status).json(error)
     }
