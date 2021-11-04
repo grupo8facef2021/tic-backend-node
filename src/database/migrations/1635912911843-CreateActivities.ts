@@ -38,6 +38,18 @@ export class CreateActivities1635912911843 implements MigrationInterface {
                     type: 'uuid'
                 },
                 {
+                    name: 'situation_id',
+                    type: 'uuid'
+                },
+                {
+                    name: 'user_id',
+                    type: 'uuid'
+                },
+                {
+                    name: 'prevision_date',
+                    type: 'timestamp'
+                },
+                {
                     name: 'created_at',
                     type: 'timestamp',
                     default: 'now()'
@@ -46,18 +58,6 @@ export class CreateActivities1635912911843 implements MigrationInterface {
                     name: 'updated_at',
                     type: 'timestamp',
                     default: 'now()'
-                },
-                {
-                    name: 'prevision_date',
-                    type: 'timestamp'
-                },
-                {
-                    name: 'situation_id',
-                    type: 'uuid'
-                },
-                {
-                    name: 'user_id',
-                    type: 'uuid'
                 }
             ],
             foreignKeys: [

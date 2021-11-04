@@ -30,16 +30,6 @@ export class CreateClients1635912380719 implements MigrationInterface {
                     type: 'varchar(30)'
                 },
                 {
-                    name: 'created_at',
-                    type: 'timestamp',
-                    default: 'now()'
-                },
-                {
-                    name: 'updated_at',
-                    type: 'timestamp',
-                    default: 'now()'
-                },
-                {
                     name: 'cep',
                     type: 'varchar(15)'
                 },
@@ -53,18 +43,28 @@ export class CreateClients1635912380719 implements MigrationInterface {
                 },
                 {
                     name: 'number',
-                    type: 'int'
+                    type: 'varchar(4)'
                 },
                 {
                     name: 'status',
                     type: 'int',
                     default: 1
+                },
+                {
+                    name: 'created_at',
+                    type: 'timestamp',
+                    default: 'now()'
+                },
+                {
+                    name: 'updated_at',
+                    type: 'timestamp',
+                    default: 'now()'
                 }
             ]
         }))
     }
 
     public async down(queryRunner: QueryRunner): Promise<void> {
+        await queryRunner.dropTable('clients')
     }
-
 }

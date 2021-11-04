@@ -1,7 +1,6 @@
 import ClientRepository from "../repositories/ClientRepository"
 import { getCustomRepository } from "typeorm"
 import CustomError from "../exceptions/CustomError"
-import { response } from "express"
 
 interface ICreateRequest {
     name: string,
@@ -11,8 +10,18 @@ interface ICreateRequest {
     cep: string,
     street: string,
     neighborhood: string,
-    number: number
+    number: string
+}
 
+interface IUpdateRequest {
+    id: string,
+    name: string,
+    phone: string,
+    email: string,
+    cep: string,
+    street: string,
+    neighborhood: string,
+    number: string
 }
 
 class ClientService {
@@ -22,6 +31,14 @@ class ClientService {
         this.clientRepository = getCustomRepository(ClientRepository)
     }
 
+    async _findClient(id: string){
+        const client = await this.clientRepository.findOne(id)
+        if (!client) {
+            throw new CustomError('Cliente não encontrado', 404)
+        }
+
+        return client
+    }
 
     async getAll() {
         const clients = await this.clientRepository.find()
@@ -29,11 +46,7 @@ class ClientService {
     }
 
     async getOnly(id: string) {
-        const client = await this.clientRepository.findOne(id)
-
-        if (!client) {
-            throw new CustomError('Cliente não encontrado', 404)
-        }
+        return await this._findClient(id)
     }
 
     async create({ name, cpf, phone, email, cep, street, neighborhood, number }: ICreateRequest) {
@@ -50,12 +63,20 @@ class ClientService {
         return newClient
     }
 
-    update() {
+    async update({id, name, phone, email, cep, street, neighborhood, number}: IUpdateRequest) {
+        let client = await this._findClient(id)
 
+        client = {...client, name, phone, email, cep, street, neighborhood, number}
+
+        await this.clientRepository.save(client)
+        
+        return client
     }
 
-    remove() {
+    async remove(id: string) {
+        await this._findClient(id)
 
+        await this.clientRepository.delete(id)
     }
 }
 

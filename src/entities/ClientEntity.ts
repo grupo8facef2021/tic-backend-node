@@ -19,25 +19,25 @@ class ClientEntity {
     email: string
 
     @Column()
-    created_at: Date
-
-    @UpdateDateColumn()
-    updated_at: Date
-
-    @Column()
     cep: string
 
     @Column()
     street: string
 
     @Column()
-    neighborhood: string;
+    neighborhood: string
 
     @Column()
-    number: number
+    number: string
 
     @Column()
     status: number
+
+    @Column()
+    created_at: Date
+
+    @UpdateDateColumn()
+    updated_at: Date
 }
 
 export default ClientEntity

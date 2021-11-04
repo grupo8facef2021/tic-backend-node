@@ -7,7 +7,6 @@ class UserSchema{
     status: number
 
     constructor(params: UserEntity){
-        console.log(params)
         this.id = params.id
         this.email = params.email
         this.level = params.level
