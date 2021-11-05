@@ -3,6 +3,8 @@ import { getCustomRepository } from "typeorm"
 import ClientService from "./ClientService"
 import SituationService from "./SituationService"
 import UserService from "./UserService"
+import CustomError from "../exceptions/CustomError"
+import EmployeeService from "./EmployeeService"
 
 interface ICreateRequest {
     title: string,
@@ -13,11 +15,16 @@ interface ICreateRequest {
     prevision_date: Date,
     client_id: string,
     situation_id: string,
-    user_id: string
+    user_id: string,
+    employee_id: string
 }
 
 interface IUpdateRequest {
-
+    id: string,
+    title: string,
+    description: string,
+    prevision_date: Date,
+    situation_id: string,
 }
 
 class ActivitieService {
@@ -28,22 +35,33 @@ class ActivitieService {
         this.activitieRepository = getCustomRepository(ActivitieRepository)
     }
 
-    async getAll() {
+    async _findActivitie(id: string){
+        const activitie = await this.activitieRepository.findOne(id, { relations: ['client', 'situation', 'user'] })
+        if(!activitie){
+            throw new CustomError('Atividade não encontrada')
+        }
 
+        return activitie
+    }
+
+    async getAll() {
+        return await this.activitieRepository.find({ relations: ['client', 'situation', 'user'] })
     }
 
     async getOnly(id: string) {
-
+        return await this._findActivitie(id)
     }
 
     async create(payload: ICreateRequest) {
         const clientService = new ClientService()
         const situationService = new SituationService()
         const userService = new UserService()
+        const employeeService = new EmployeeService()
 
         const client = await clientService._findClient(payload.client_id)
         const situation = await situationService._findSituation(payload.situation_id)
         const user = await userService._findUser(payload.user_id)
+        const employee = await employeeService._findEmployee(payload.employee_id)
 
         const activitie = this.activitieRepository.create({
             title: payload.title,
@@ -54,7 +72,8 @@ class ActivitieService {
             prevision_date: payload.prevision_date,
             client,
             situation,
-            user
+            user,
+            employee
         })
 
         await this.activitieRepository.save(activitie)
@@ -62,12 +81,30 @@ class ActivitieService {
         return activitie
     }
 
-    async update({ }: IUpdateRequest) {
+    async update(payload: IUpdateRequest) {
+        const situationService = new SituationService()
 
+        const situation = await situationService._findSituation(payload.situation_id)
+
+        let activitie = await this._findActivitie(payload.id)
+
+        activitie = {
+            ...activitie, 
+            title: payload.title,
+            description: payload.description,
+            prevision_date: payload.prevision_date,
+            situation,
+        }
+
+        await this.activitieRepository.save(activitie)
+
+        return activitie
     }
 
     async remove(id: string) {
+        await this._findActivitie(id)
 
+        await this.activitieRepository.delete(id)
     }
 }
 

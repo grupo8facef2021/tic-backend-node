@@ -9,12 +9,18 @@ import authRoutes from './routes/AuthRoutes'
 import clientRoutes from './routes/ClientRoutes'
 import activitieRoutes from './routes/ActivitieRoutes'
 import { errors } from 'celebrate'
+import cors from 'cors'
 
 const app = express()
 
 const router = Router()
 
 app.use(express.json())
+
+app.use(cors({
+    origin: true,
+    credentials: true
+}))
 
 router.use('/employees', employeeRoutes)
 router.use('/users', userRoutes)
@@ -23,7 +29,7 @@ router.use('/situations', situationRoutes)
 router.use('/clients', clientRoutes)
 router.use('/activities', activitieRoutes)
 
-app.use(router)
+app.use('/api', router)
 
 app.use(errors())
 

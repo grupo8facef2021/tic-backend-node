@@ -1,6 +1,7 @@
-import { JoinColumn, ManyToOne, UpdateDateColumn } from "typeorm";
+import { JoinColumn, ManyToOne, OneToOne, UpdateDateColumn } from "typeorm";
 import { Column, Entity, PrimaryColumn } from "typeorm"
 import ClientEntity from "./ClientEntity";
+import EmployeeEntity from "./EmployeeEntity";
 import SituationEntity from "./SituationEntity";
 import UserEntity from "./UserEntity";
 
@@ -25,15 +26,6 @@ class ActivitieEntity {
     @Column()
     vehicle_board: string
 
-    @JoinColumn()
-    clientId: string
-
-    // @Column()
-    // situation_id: string
-
-    // @Column()
-    // user_id: string
-
     @Column()
     prevision_date: Date
 
@@ -43,14 +35,21 @@ class ActivitieEntity {
     @UpdateDateColumn()
     updated_at: Date
 
-    @ManyToOne(() => ClientEntity)
+    @OneToOne(() => ClientEntity)
+    @JoinColumn({ name: 'client_id' })
     client: ClientEntity
 
-    @ManyToOne(() => SituationEntity)
+    @OneToOne(() => SituationEntity)
+    @JoinColumn({ name: 'situation_id' })
     situation: SituationEntity
 
-    @ManyToOne(() => UserEntity)
+    @OneToOne(() => UserEntity)
+    @JoinColumn({ name: 'user_id' })
     user: UserEntity
+
+    @OneToOne(() => EmployeeEntity)
+    @JoinColumn({ name: 'employee_id' })
+    employee: EmployeeEntity
 }
 
 export default ActivitieEntity

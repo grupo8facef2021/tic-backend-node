@@ -46,6 +46,10 @@ export class CreateActivities1635912911843 implements MigrationInterface {
                     type: 'uuid'
                 },
                 {
+                    name: 'employee_id',
+                    type: 'uuid'
+                },
+                {
                     name: 'prevision_date',
                     type: 'timestamp'
                 },
@@ -79,7 +83,14 @@ export class CreateActivities1635912911843 implements MigrationInterface {
                     name: 'fk_user_id',
                     columnNames: ['user_id'],
                     referencedColumnNames: ['id'],
-                    referencedTableName: 'clients',
+                    referencedTableName: 'users',
+                    onDelete: 'CASCADE'
+                }),
+                new TableForeignKey({
+                    name: 'fk_employee_id',
+                    columnNames: ['employee_id'],
+                    referencedColumnNames: ['id'],
+                    referencedTableName: 'employees',
                     onDelete: 'CASCADE'
                 })
             ]

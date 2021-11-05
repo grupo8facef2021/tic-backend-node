@@ -7,12 +7,12 @@ const authController = new AuthController()
 const authRouter = Router()
 authRouter.post(
     '/',
-    celebrate({
-        [Segments.BODY]: {
-            email: Joi.string().required(),
-            password: Joi.string().required()
-        }
-    }),
+    // celebrate({
+    //     [Segments.BODY]: {
+    //         email: Joi.string().required(),
+    //         password: Joi.string().required()
+    //     }
+    // }),
     authController.auth
 )
 
