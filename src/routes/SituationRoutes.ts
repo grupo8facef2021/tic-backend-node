@@ -19,41 +19,41 @@ router.get(
     },
   }),
   situationController.getOnly
-)
+);
 
 router.post(
   "/",
   celebrate({
     [Segments.BODY]: {
       description: Joi.string().required(),
-      color: Joi.string().required()
+      color: Joi.string().required(),
     },
   }),
   situationController.post
 );
 
 router.put(
-  '/:id',
+  "/:id",
   celebrate({
     [Segments.PARAMS]: {
-      id: Joi.string().uuid().required()
+      id: Joi.string().uuid().required(),
     },
     [Segments.BODY]: {
       description: Joi.string().required(),
-      color: Joi.string()
-    }
+      color: Joi.string(),
+    },
   }),
   situationController.put
-)
+);
 
 router.delete(
-  '/:id',
+  "/:id",
   celebrate({
     [Segments.PARAMS]: {
-      id: Joi.string().uuid().required()
-    }
+      id: Joi.string().uuid().required(),
+    },
   }),
   situationController.delete
-)
+);
 
 export default router;

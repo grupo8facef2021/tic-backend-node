@@ -1,19 +1,18 @@
-import { Entity, PrimaryColumn, Column } from 'typeorm'
+import { Entity, PrimaryColumn, Column } from "typeorm";
 
-@Entity('employees')
+@Entity("employees")
 class EmployeeEntity {
+  @PrimaryColumn()
+  id: string;
 
-    @PrimaryColumn()
-    id: string;
+  @Column()
+  name: string;
 
-    @Column()
-    name: string;
+  @Column()
+  role: string;
 
-    @Column()
-    role: string;
-
-    @Column()
-    status: number;
+  @Column()
+  status: number;
 }
 
-export default EmployeeEntity
+export default EmployeeEntity;

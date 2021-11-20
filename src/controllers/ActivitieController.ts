@@ -2,86 +2,81 @@ import { Request, Response } from "express";
 import ActivitieService from "../services/ActivitieService";
 
 class ActivitieController {
-    async getAll(request: Request, response: Response){
-        const activitieService = new ActivitieService()
+  async getAll(request: Request, response: Response) {
+    const activitieService = new ActivitieService();
 
-        const activities = await activitieService.getAll()
-        return response.json(activities)
-    }
+    const activities = await activitieService.getAll();
+    return response.json(activities);
+  }
 
-    async getOnly(request: Request, response: Response){
-        const activitieService = new ActivitieService()
+  async getOnly(request: Request, response: Response) {
+    const activitieService = new ActivitieService();
 
-        const {id} = request.params
+    const { id } = request.params;
 
-        const activitie = await activitieService.getOnly(id)
-        return response.json(activitie)
-    }
+    const activitie = await activitieService.getOnly(id);
+    return response.json(activitie);
+  }
 
-    async post(request: Request, response: Response) {
-        const activitieService = new ActivitieService()
+  async post(request: Request, response: Response) {
+    const activitieService = new ActivitieService();
 
-        const {
-            title,
-            description,
-            vehicle_model,
-            vehicle_color,
-            vehicle_board,
-            prevision_date,
-            client_id,
-            situation_id,
-            user_id,
-            employee_id
-        } = request.body
+    const {
+      title,
+      description,
+      vehicle_model,
+      vehicle_color,
+      vehicle_board,
+      prevision_date,
+      client_id,
+      situation_id,
+      user_id,
+      employee_id,
+    } = request.body;
 
-        const activitie = await activitieService.create({
-            title,
-            description,
-            vehicle_model,
-            vehicle_color,
-            vehicle_board,
-            prevision_date,
-            client_id,
-            situation_id,
-            user_id,
-            employee_id
-        })
+    const activitie = await activitieService.create({
+      title,
+      description,
+      vehicle_model,
+      vehicle_color,
+      vehicle_board,
+      prevision_date,
+      client_id,
+      situation_id,
+      user_id,
+      employee_id,
+    });
 
-        return response.status(201).json(activitie)
-    }
+    return response.status(201).json(activitie);
+  }
 
-    async patch(request: Request, response: Response) {
-        const activitieService = new ActivitieService()
+  async patch(request: Request, response: Response) {
+    const activitieService = new ActivitieService();
 
-        const {id} = request.params
+    const { id } = request.params;
 
-        const {
-            title,
-            description,
-            prevision_date,
-            situation_id,
-        } = request.body
+    const { title, description, prevision_date, situation_id } = request.body;
 
-        const activitie = await activitieService.update({
-            id,
-            title,
-            description,
-            prevision_date,
-            situation_id,
-        })
+    const activitie = await activitieService.update({
+      id,
+      title,
+      description,
+      prevision_date,
+      situation_id,
+    });
 
-        return response.status(200).json(activitie)
-    }
+    return response.status(200).json(activitie);
+  }
 
-    async delete(request: Request, response: Response){
-        const activitieService = new ActivitieService()
+  async delete(request: Request, response: Response) {
+    const activitieService = new ActivitieService();
 
-        const {id} = request.params
+    const { id } = request.params;
 
-        await activitieService.remove(id)
+    await activitieService.remove(id);
 
-        return response.status(204).end()
-    }
+    return response.status(204).end();
+  }
 }
 
-export default ActivitieController
+export default ActivitieController;

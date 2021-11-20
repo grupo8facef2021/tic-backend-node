@@ -1,15 +1,13 @@
 {
-    "type": "postgres",
-    "host": "localhost",
-    "port": 55555,
-    "username": "postgres",
-    "password": "123456",
-    "database": "tic-database",
-    "migrations": [
-        "./src/database/migrations/*.ts"
-    ],
-    "cli": {
-        "migrationsDir":"./src/database/migrations/"
-    },
-    "entities": ["./src/entities/*.ts"]
+  "type": "postgres",
+  "host": "localhost",
+  "port": 55555,
+  "username": "postgres",
+  "password": "123456",
+  "database": "tic-database",
+  "migrations": ["./src/database/migrations/*.ts"],
+  "cli": {
+    "migrationsDir": "./src/database/migrations/"
+  },
+  "entities": ["./src/entities/*.ts"]
 }

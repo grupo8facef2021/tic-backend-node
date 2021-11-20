@@ -1,16 +1,15 @@
-import { EntityRepository, Repository } from 'typeorm'
-import SituationEntity from '../entities/SituationEntity';
+import { EntityRepository, Repository } from "typeorm";
+import SituationEntity from "../entities/SituationEntity";
 
 @EntityRepository(SituationEntity)
-class SituationRepository extends Repository<SituationEntity>{
-    async findByDescription(description: string) {
-        return await this.findOne({
-            where: {
-                description
-            }
-        })
-    }
+class SituationRepository extends Repository<SituationEntity> {
+  async findByDescription(description: string) {
+    return await this.findOne({
+      where: {
+        description,
+      },
+    });
+  }
 }
-
 
 export default SituationRepository;

@@ -1,17 +1,17 @@
 import UserEntity from "src/entities/UserEntity";
 
-class UserSchema{
-    id: string
-    email: string
-    level: number
-    status: number
+class UserSchema {
+  id: string;
+  email: string;
+  level: number;
+  status: number;
 
-    constructor(params: UserEntity){
-        this.id = params.id
-        this.email = params.email
-        this.level = params.level
-        this.status = params.status
-    }
+  constructor(params: UserEntity) {
+    this.id = params.id;
+    this.email = params.email;
+    this.level = params.level;
+    this.status = params.status;
+  }
 }
 
-export default UserSchema
+export default UserSchema;

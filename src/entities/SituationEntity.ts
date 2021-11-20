@@ -1,19 +1,18 @@
-import { Entity, PrimaryColumn, Column } from 'typeorm'
+import { Entity, PrimaryColumn, Column } from "typeorm";
 
-@Entity('situations')
+@Entity("situations")
 class SituationEntity {
+  @PrimaryColumn()
+  id: string;
 
-    @PrimaryColumn()
-    id: string;
+  @Column()
+  description: string;
 
-    @Column()
-    description: string;
+  @Column()
+  color: string;
 
-    @Column()
-    color: string;
-
-    @Column()
-    status: number
+  @Column()
+  status: number;
 }
 
 export default SituationEntity;
