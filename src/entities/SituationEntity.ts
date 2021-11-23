@@ -9,7 +9,7 @@ class SituationEntity {
   description: string;
 
   @Column()
-  color: string;
+  color: number;
 
   @Column()
   status: number;

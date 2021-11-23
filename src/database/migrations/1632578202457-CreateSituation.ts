@@ -19,7 +19,7 @@ export class CreateSituation1632578202457 implements MigrationInterface {
           },
           {
             name: "color",
-            type: "varchar",
+            type: "int",
           },
           {
             name: "status",

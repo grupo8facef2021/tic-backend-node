@@ -4,13 +4,13 @@ import SituationRepository from "../repositories/SituationRepository";
 
 interface ICreateRequest {
   description: string;
-  color: string;
+  color: number;
 }
 
 interface IUpdateRequest {
   id: string;
   description: string;
-  color: string;
+  color: number;
 }
 
 class SituationService {
