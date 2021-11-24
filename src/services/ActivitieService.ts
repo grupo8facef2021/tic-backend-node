@@ -36,7 +36,7 @@ class ActivitieService {
 
   async _findActivitie(id: string) {
     const activitie = await this.activitieRepository.findOne(id, {
-      relations: ["client", "situation", "user"],
+      relations: ["client", "situation", "user", "employee"],
     });
     if (!activitie) {
       throw new CustomError("Atividade não encontrada");
@@ -47,7 +47,7 @@ class ActivitieService {
 
   async getAll() {
     return await this.activitieRepository.find({
-      relations: ["client", "situation", "user"],
+      relations: ["client", "situation", "user", "employee"],
     });
   }
 

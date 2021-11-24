@@ -26,7 +26,7 @@ router.post(
   celebrate({
     [Segments.BODY]: {
       description: Joi.string().required(),
-      color: Joi.string().required(),
+      color: Joi.number().required(),
     },
   }),
   situationController.post
@@ -40,7 +40,7 @@ router.put(
     },
     [Segments.BODY]: {
       description: Joi.string().required(),
-      color: Joi.string(),
+      color: Joi.number(),
     },
   }),
   situationController.put

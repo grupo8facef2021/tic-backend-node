@@ -49,7 +49,8 @@ class AuthService {
     const [, token] = authHeaders.split(" ");
 
     try {
-      verify(token, authConfig.jwt.secret);
+      const {sub} = verify(token, authConfig.jwt.secret);
+      request.user_id = sub
       return next();
     } catch (error) {
       throw new CustomError("Token inválido", 401);

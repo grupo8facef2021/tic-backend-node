@@ -21,7 +21,6 @@ router.post(
       prevision_date: Joi.date().required(),
       client_id: Joi.string().uuid().required(),
       situation_id: Joi.string().uuid().required(),
-      user_id: Joi.string().uuid().required(),
       employee_id: Joi.string().uuid().required(),
     },
   }),
@@ -40,7 +39,7 @@ router.get(
   activitieController.getOnly
 );
 
-router.patch(
+router.put(
   "/:id",
   celebrate({
     [Segments.PARAMS]: {
@@ -53,7 +52,7 @@ router.patch(
       situation_id: Joi.string().uuid().required(),
     },
   }),
-  activitieController.patch
+  activitieController.put
 );
 
 router.delete(

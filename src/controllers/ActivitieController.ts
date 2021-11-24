@@ -21,6 +21,8 @@ class ActivitieController {
   async post(request: Request, response: Response) {
     const activitieService = new ActivitieService();
 
+    const {user_id} = request
+    
     const {
       title,
       description,
@@ -30,7 +32,6 @@ class ActivitieController {
       prevision_date,
       client_id,
       situation_id,
-      user_id,
       employee_id,
     } = request.body;
 
@@ -50,7 +51,7 @@ class ActivitieController {
     return response.status(201).json(activitie);
   }
 
-  async patch(request: Request, response: Response) {
+  async put(request: Request, response: Response) {
     const activitieService = new ActivitieService();
 
     const { id } = request.params;
